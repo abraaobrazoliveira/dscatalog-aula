@@ -2,6 +2,7 @@ package com.devsuperior.dscatalog.resources;
 
 import com.devsuperior.dscatalog.entities.Category;
 import org.apache.catalina.core.ApplicationContext;
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -14,13 +15,18 @@ import java.util.List;
 
 public class CategoryResourcesTest {
 
+    CategoryResources categoryResources;
+
     @Autowired
     ApplicationContext context;
 
+    @Before
+    public void before() {
+        categoryResources = Mockito.mock(CategoryResources.class);
+    }
+
     @Test
     public void shouldReturnAllCategoriesAndSuccessStatus() {
-
-        CategoryResources categoryResources = Mockito.mock(CategoryResources.class);
 
         List<Category> categories = new ArrayList<>();
         categories.add(new Category(1L, "Books"));
@@ -38,5 +44,6 @@ public class CategoryResourcesTest {
 
 
     }
+
 
 }
