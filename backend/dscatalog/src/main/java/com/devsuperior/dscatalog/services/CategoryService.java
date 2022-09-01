@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -24,9 +24,14 @@ public class CategoryService {
     }
 
     @Transactional
-    public Category save(Category category) {
-        return repository.save(category);
+    public CategoryDTO save(Category category) {
+        return new CategoryDTO(repository.save(category));
     }
 
-
+    @Transactional(readOnly = true)
+    public CategoryDTO findById(Long id) throws EntityNotFoundException {
+        Optional<Category> obj = repository.findById(id);
+        Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Não possui a categoria requisitada"));
+        return new CategoryDTO(entity);
+    }
 }
