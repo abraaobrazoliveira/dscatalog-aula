@@ -1,5 +1,6 @@
 package com.devsuperior.dscatalog.resources;
 
+import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.entities.Category;
 import org.apache.catalina.core.ApplicationContext;
 import org.junit.Before;
@@ -28,9 +29,9 @@ public class CategoryResourcesTest {
     @Test
     public void shouldReturnAllCategoriesAndSuccessStatus() {
 
-        List<Category> categories = new ArrayList<>();
-        categories.add(new Category(1L, "Books"));
-        categories.add(new Category(2L, "Electronics"));
+        List<CategoryDTO> categories = new ArrayList<>();
+        categories.add(new CategoryDTO(new Category(1L, "Books")));
+        categories.add(new CategoryDTO(new Category(2L, "Electronics")));
         Mockito.when(categoryResources.findAll()).thenReturn(ResponseEntity.ok(categories));
 
         ResponseEntity response = categoryResources.findAll();
